@@ -48,7 +48,7 @@ To run these tools locally:
 
 1. **Clone the repository**: 
     ```bash
-    git clone [https://github.com/yourusername/nnn-nonstop-ngoding-november.git](https://github.com/Cloud-Dark/nnn/)
+    git clone https://github.com/Cloud-Dark/nnn/
     cd nnn-nonstop-ngoding-november
     ```
 2. **Install Dependencies** (if any):
