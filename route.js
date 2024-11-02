@@ -1,0 +1,70 @@
+// route.js
+const express = require('express');
+const router = express.Router();
+
+// Importing tools
+const getIpAddress = require('./tools/ip_address_viewer');
+const getTimeZone = require('./tools/local_time_zone_display');
+const getUserAgent = require('./tools/user_agent_info');
+const countCharacters = require('./tools/character_counter');
+const getDeviceOrientation = require('./tools/device_orientation_detector');
+const hexToRgb = require('./tools/hex_to_rgb');
+const passwordStrengthChecker = require('./tools/password_strength_checker');
+const loremIpsumGenerator = require('./tools/lorem_ipsum_generator');
+const realTimeCurrencyConverter = require('./tools/real_time_currency_converter');
+const ageCalculator = require('./tools/age_calculator');
+const weatherDetector = require('./tools/weather_detector');
+const fileSizeCalculator = require('./tools/file_size_calculator');
+const base64EncoderDecoder = require('./tools/base64_encoder_decoder');
+const randomNumberGenerator = require('./tools/random_number_generator');
+const pomodoroTimer = require('./tools/pomodoro_timer');
+const urlShortener = require('./tools/url_shortener');
+const screenResolutionDisplay = require('./tools/screen_resolution_display');
+const batteryStatusIndicator = require('./tools/battery_status_indicator');
+const weatherDateWidget = require('./tools/weather_date_widget');
+const wordFrequencyCounter = require('./tools/word_frequency_counter');
+const networkStatusChecker = require('./tools/network_status_checker');
+const binaryToDecimalConverter = require('./tools/binary_to_decimal_converter');
+const loanCalculator = require('./tools/loan_calculator');
+const scrollPositionTracker = require('./tools/scroll_position_tracker');
+const bmiCalculator = require('./tools/bmi_calculator');
+const randomPasswordGenerator = require('./tools/random_password_generator');
+const dateDifferenceCalculator = require('./tools/date_difference_calculator');
+const sunsetSunriseTimeDisplay = require('./tools/sunset_sunrise_time_display');
+const timeZoneConverter = require('./tools/time_zone_converter');
+const ageInSecondsCalculator = require('./tools/age_in_seconds_calculator');
+
+// Define routes for each tool
+router.get('/ip', (req, res) => res.send({ ip: getIpAddress(req) }));
+router.get('/timezone', (req, res) => res.send({ timezone: getTimeZone() }));
+router.get('/user-agent', (req, res) => res.send({ userAgent: getUserAgent(req) }));
+router.get('/character-count', (req, res) => res.send({ count: countCharacters(req.query.text || '') }));
+router.get('/device-orientation', (req, res) => res.send({ orientation: getDeviceOrientation(parseInt(req.query.width), parseInt(req.query.height)) }));
+router.get('/hex-to-rgb', (req, res) => res.send({ rgb: hexToRgb(req.query.hex) }));
+router.get('/password-strength', (req, res) => res.send({ strength: passwordStrengthChecker(req.query.password) }));
+router.get('/lorem-ipsum', (req, res) => res.send({ text: loremIpsumGenerator() }));
+router.get('/currency-convert', (req, res) => res.send({ result: realTimeCurrencyConverter(parseFloat(req.query.amount), parseFloat(req.query.rate)) }));
+router.get('/age', (req, res) => res.send({ age: ageCalculator(parseInt(req.query.birthYear)) }));
+router.get('/weather', (req, res) => res.send(weatherDetector(req.query.city)));
+router.get('/file-size', (req, res) => res.send({ size: fileSizeCalculator(parseInt(req.query.sizeInBytes)) }));
+router.get('/base64-encode', (req, res) => res.send({ encoded: base64EncoderDecoder.base64Encoder(req.query.text) }));
+router.get('/base64-decode', (req, res) => res.send({ decoded: base64EncoderDecoder.base64Decoder(req.query.encoded) }));
+router.get('/random-number', (req, res) => res.send({ number: randomNumberGenerator(parseInt(req.query.min), parseInt(req.query.max)) }));
+router.get('/pomodoro-timer', (req, res) => res.send({ timer: pomodoroTimer(req.query.duration) }));
+router.get('/url-shortener', (req, res) => res.send({ shortUrl: urlShortener(req.query.url) }));
+router.get('/screen-resolution', (req, res) => res.send({ resolution: screenResolutionDisplay(parseInt(req.query.width), parseInt(req.query.height)) }));
+router.get('/battery-status', (req, res) => res.send({ battery: batteryStatusIndicator() }));
+router.get('/weather-date-widget', (req, res) => res.send(weatherDateWidget()));
+router.get('/word-frequency', (req, res) => res.send({ frequency: wordFrequencyCounter(req.query.text) }));
+router.get('/network-status', (req, res) => res.send(networkStatusChecker()));
+router.get('/binary-to-decimal', (req, res) => res.send({ decimal: binaryToDecimalConverter(req.query.binary) }));
+router.get('/loan-calculator', (req, res) => res.send({ payment: loanCalculator(parseFloat(req.query.amount), parseFloat(req.query.rate), parseInt(req.query.years)) }));
+router.get('/scroll-position', (req, res) => res.send({ scrollPosition: scrollPositionTracker() }));
+router.get('/bmi', (req, res) => res.send({ bmi: bmiCalculator(parseFloat(req.query.weight), parseFloat(req.query.height)) }));
+router.get('/random-password', (req, res) => res.send({ password: randomPasswordGenerator(parseInt(req.query.length) || 8) }));
+router.get('/date-difference', (req, res) => res.send({ daysDifference: dateDifferenceCalculator(req.query.date1, req.query.date2) }));
+router.get('/sunset-sunrise', (req, res) => res.send(sunsetSunriseTimeDisplay(req.query.date, req.query.location)));
+router.get('/time-zone-converter', (req, res) => res.send(timeZoneConverter(req.query.date, req.query.fromZone, req.query.toZone)));
+router.get('/age-in-seconds', (req, res) => res.send({ ageInSeconds: ageInSecondsCalculator(req.query.birthDate) }));
+
+module.exports = router;
